@@ -4,10 +4,13 @@ import { useState } from "react";
 import CustomButton from "../../components/CustomButton";
 
 export default function Login({navigation}) {
-    const [inputValue, setInputValue] = useState('');
+    const [user, setUser] = useState({
+        email: "",
+        password: ""
+    });
 
-    const handleInputChange = (text) => {
-        setInputValue(text);
+    const handleInputChange = (e) => {
+        setUser({...user, [e.target.name]: e.target.value});
     }
 
     const handleRegisterNavigation = () => {
@@ -23,15 +26,17 @@ export default function Login({navigation}) {
             <View>
                 <TextInput
                     placeholder="Email"
+                    name="email"
                     style={styles.textInput}
                     onChangeText={handleInputChange}
-                    value={inputValue}
+                    value={user.email}
                 />
                 <TextInput
                     placeholder="Password"
+                    name="password"
                     style={styles.textInput}
                     onChangeText={handleInputChange}
-                    value={inputValue}
+                    value={user.password}
                 />
                 <CustomButton 
                     title="Login" 
