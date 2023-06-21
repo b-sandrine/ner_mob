@@ -1,4 +1,4 @@
-import { TextInput, View } from "react-native-web";
+import { TextInput,Text, View } from "react-native";
 
 export default function Login() {
     return (

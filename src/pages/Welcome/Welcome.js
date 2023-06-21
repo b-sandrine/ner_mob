@@ -1,13 +1,22 @@
-import { Button, View, Text, StyleSheet } from "react-native-web";
+import { View, Text, StyleSheet } from "react-native";
 import CustomButton from "../../components/CustomButton";
 
-export default function Welcome() {
+export default function Welcome({navigation}) {
+
+    const handleNavigateLogin = () => {
+        navigation.navigate('login');
+    }
+
+    const handleNavigateRegister = () => {
+        navigation.navigate('register');
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Welcome to NEC Voting System</Text>
             <View style={styles.buttonContainer}>
-                <CustomButton title="Login" style={{width: 100 }} />
-                <CustomButton title="Register" style={{width: 100}}  />
+                <CustomButton title="Login" style={{width: 100 }} onPress={handleNavigateLogin} />
+                <CustomButton title="Register" style={{width: 100}} onPress={handleNavigateRegister} />
             </View>
         </View>
     )
