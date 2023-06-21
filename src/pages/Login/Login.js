@@ -10,6 +10,8 @@ export default function Login({navigation}) {
         password: ""
     });
 
+    const [error, setError] = useState(''); 
+
     const handleInputChange = (name, value) => {
         setUser({...user, [name]: value});
     }
@@ -26,7 +28,8 @@ export default function Login({navigation}) {
             navigation.navigate('dashboard');
         })    
         .catch((err) => {
-            console.log(err);
+            console.log(err.response.error.data);
+            setError(err.response.error.data)
         })
     }
 
@@ -36,6 +39,7 @@ export default function Login({navigation}) {
                 <Text style={styles.text}>Welcome back</Text>
                 <Text style={styles.minText}>Login to access your account</Text>
             </View>
+            {error && <Text style={styles.error}>{error}</Text>}
             <View>
                 <TextInput
                     placeholder="Email"
@@ -98,5 +102,11 @@ const styles = StyleSheet.create({
         color: '#4F4F4F',
         padding: 7,
         backgroundColor: 'rgba(217, 217, 217, 0.76)',
+    },
+    error: {
+        color: "red",
+        marginTop: 10,
+        marginBottom: 10,
+        alignSelf: 'center'
     }
 })

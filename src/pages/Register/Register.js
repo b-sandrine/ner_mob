@@ -10,10 +10,11 @@ export default function Register({navigation}) {
         fullnames: "",
         address: "",
         email: "",
-        phone: "",
+        phoneNumber: "",
         nid: "",
         password: ""
     })
+    const [error, setError] = useState(''); 
 
     const handleInputChange = (name, value) => {
         setUser({...user, [name]: value})
@@ -32,6 +33,7 @@ export default function Register({navigation}) {
         })    
         .catch((err) => {
             console.log(err);
+            setError(err.response.data.error)
         })
     }
     return (
@@ -40,6 +42,8 @@ export default function Register({navigation}) {
                 <Text style={styles.text}>Sign up to Continue</Text>
                 <Text style={styles.minText}>Almost there</Text>
             </View>
+            {error && <Text style={styles.error}>{error}</Text>}
+
             <View>
                 <TextInput
                     placeholder="Full Names"
@@ -66,7 +70,7 @@ export default function Register({navigation}) {
                     placeholder="Phone Number"
                     name= "phone"
                     style={styles.textInput}
-                    onChangeText={(text) => handleInputChange("phone", text)}
+                    onChangeText={(text) => handleInputChange("phoneNumber", text)}
                     value={user.phone}
                 />
                 <TextInput
@@ -131,5 +135,11 @@ const styles = StyleSheet.create({
         color: '#4F4F4F',
         padding: 7,
         backgroundColor: 'rgba(217, 217, 217, 0.76)',
+    },
+    error: {
+        color: "red",
+        marginTop: 10,
+        marginBottom: 10,
+        alignSelf: 'center'
     }
 })
