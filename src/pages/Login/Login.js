@@ -18,7 +18,7 @@ export default function Login({navigation}) {
     }
 
     const handleFormSubmit = () => {
-        console.log(user);
+        console.log(user);    
     }
 
     return (
