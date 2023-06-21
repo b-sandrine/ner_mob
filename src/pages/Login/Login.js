@@ -23,7 +23,7 @@ export default function Login({navigation}) {
         axios.post('http://localhost:3000/api/users/login',user)
         .then((response) => {
             console.log(response);
-            navigation.navigate('welcome');
+            navigation.navigate('dashboard');
         })    
         .catch((err) => {
             console.log(err);
