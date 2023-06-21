@@ -34,7 +34,7 @@ export default function Login() {
             </View>
             <View style={styles.textContainer}>
                 <Text style={styles.text}>OR</Text>
-                <Text style={styles.minText}>Do not have an account? Register</Text>
+                <Text style={styles.minText}>Do not have an account?  <Text style={{color: '#018CE3'}}>Register</Text></Text>
             </View>
         </View>
     )
