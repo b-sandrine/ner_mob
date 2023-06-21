@@ -15,8 +15,15 @@ export default function Welcome({navigation}) {
         <View style={styles.container}>
             <Text style={styles.text}>Welcome to NEC Voting System</Text>
             <View style={styles.buttonContainer}>
-                <CustomButton title="Login" style={{width: 100 }} onPress={handleNavigateLogin} />
-                <CustomButton title="Register" style={{width: 100}} onPress={handleNavigateRegister} />
+                <CustomButton 
+                    title="Login" 
+                    style={{width: 100 , marginRight: 10}} 
+                    onPress={handleNavigateLogin} 
+                />
+                <CustomButton
+                    title="Register" 
+                    style={{width: 100, marginLeft: 10}} 
+                    onPress={handleNavigateRegister} />
             </View>
         </View>
     )
@@ -35,6 +42,7 @@ const styles = StyleSheet.create({
         fontSize: 25,
         fontWeight: 'bold',
         margin: 10,
+        color: '#4F4F4F', 
     },
     buttonContainer: {
         flex: 1,
