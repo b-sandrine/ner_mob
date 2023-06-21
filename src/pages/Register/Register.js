@@ -3,7 +3,7 @@ import { Text, View, StyleSheet , TextInput} from "react-native";
 import { useState } from "react";
 import CustomButton from "../../components/CustomButton";
 
-export default function Register() {
+export default function Register({navigation}) {
     const [user, setUser] = [{
         fullnames: "",
         address: "",
@@ -15,6 +15,10 @@ export default function Register() {
 
     const handleInputChange = (e) => {
         setUser({...user, [e.target.name]: e.target.value})
+    }
+
+    const handleLoginNavigation = () => {
+        navigation.navigate('login');
     }
 
     return (
@@ -72,7 +76,7 @@ export default function Register() {
             </View>
             <View style={styles.textContainer}>
                 <Text style={styles.text}>OR</Text>
-                <Text style={styles.minText}>Already have an account? <Text style={{color: '#018CE3'}}>Login</Text></Text>
+                <Text style={styles.minText}>Already have an account? <Text style={{color: '#018CE3'}} onPress={handleLoginNavigation}>Login</Text></Text>
             </View>
         </View>
     )
@@ -82,12 +86,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        marginTop: 10,
         textAlign: 'center'
     },
     textContainer: {
-        marginTop: 30,
-        marginBottom: 30,
+        marginTop: 25,
+        marginBottom: 25,
         marginLeft: 'auto',
         marginRight: 'auto',
     },

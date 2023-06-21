@@ -3,12 +3,17 @@ import { Text, View, StyleSheet , TextInput} from "react-native";
 import { useState } from "react";
 import CustomButton from "../../components/CustomButton";
 
-export default function Login() {
+export default function Login({navigation}) {
     const [inputValue, setInputValue] = useState('');
 
     const handleInputChange = (text) => {
         setInputValue(text);
     }
+
+    const handleRegisterNavigation = () => {
+        navigation.navigate('register')
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.textContainer}>
@@ -34,7 +39,7 @@ export default function Login() {
             </View>
             <View style={styles.textContainer}>
                 <Text style={styles.text}>OR</Text>
-                <Text style={styles.minText}>Do not have an account?  <Text style={{color: '#018CE3'}}>Register</Text></Text>
+                <Text style={styles.minText}>Do not have an account?  <Text style={{color: '#018CE3'}} onPress={handleRegisterNavigation}>Register</Text></Text>
             </View>
         </View>
     )
