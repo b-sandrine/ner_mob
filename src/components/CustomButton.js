@@ -12,9 +12,9 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: '#40A8EA',
         height: 50,
-        width: 250,
+        width: 260,
         borderRadius: 10,
-        margin: 10,
+        marginTop: 10,
         paddingTop: 8,
         textAlign: 'center'
     },
