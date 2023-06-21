@@ -2,6 +2,7 @@ import { Text, View, StyleSheet , TextInput} from "react-native";
 // import Input from "../../components/Input";
 import { useState } from "react";
 import CustomButton from "../../components/CustomButton";
+import axios from "axios";
 
 export default function Register({navigation}) {
     
@@ -24,6 +25,14 @@ export default function Register({navigation}) {
 
     const handleFormSubmit = () => {
         console.log(user)
+        axios.post('http://localhost:3000/api/users/create',user)
+        .then((response) => {
+            console.log(response);
+            navigation.navigate('login');
+        })    
+        .catch((err) => {
+            console.log(err);
+        })
     }
     return (
         <View style={styles.container}>

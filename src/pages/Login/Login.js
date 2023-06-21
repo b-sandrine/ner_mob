@@ -2,6 +2,7 @@ import { Text, View, StyleSheet , TextInput} from "react-native";
 // import Input from "../../components/Input";
 import { useState } from "react";
 import CustomButton from "../../components/CustomButton";
+import axios from "axios";
 
 export default function Login({navigation}) {
     const [user, setUser] = useState({
@@ -18,7 +19,15 @@ export default function Login({navigation}) {
     }
 
     const handleFormSubmit = () => {
-        console.log(user);    
+        console.log(user);
+        axios.post('http://localhost:3000/api/users/login',user)
+        .then((response) => {
+            console.log(response);
+            navigation.navigate('welcome');
+        })    
+        .catch((err) => {
+            console.log(err);
+        })
     }
 
     return (
