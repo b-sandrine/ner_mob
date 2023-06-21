@@ -9,12 +9,16 @@ export default function Login({navigation}) {
         password: ""
     });
 
-    const handleInputChange = (e) => {
-        setUser({...user, [e.target.name]: e.target.value});
+    const handleInputChange = (name, value) => {
+        setUser({...user, [name]: value});
     }
 
     const handleRegisterNavigation = () => {
         navigation.navigate('register')
+    }
+
+    const handleFormSubmit = () => {
+        console.log(user);
     }
 
     return (
@@ -26,20 +30,20 @@ export default function Login({navigation}) {
             <View>
                 <TextInput
                     placeholder="Email"
-                    name="email"
                     style={styles.textInput}
-                    onChangeText={handleInputChange}
+                    onChangeText={(text) => handleInputChange('email', text)}
                     value={user.email}
                 />
                 <TextInput
                     placeholder="Password"
-                    name="password"
                     style={styles.textInput}
-                    onChangeText={handleInputChange}
+                    secureTextEntry={true}
+                    onChangeText={(text) => handleInputChange('password', text)}
                     value={user.password}
                 />
                 <CustomButton 
                     title="Login" 
+                    onPress={handleFormSubmit}
                 />
             </View>
             <View style={styles.textContainer}>

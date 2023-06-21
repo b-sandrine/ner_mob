@@ -4,23 +4,27 @@ import { useState } from "react";
 import CustomButton from "../../components/CustomButton";
 
 export default function Register({navigation}) {
-    const [user, setUser] = [{
+    
+    const [user, setUser] = useState({
         fullnames: "",
         address: "",
         email: "",
         phone: "",
         nid: "",
         password: ""
-    }]
+    })
 
-    const handleInputChange = (e) => {
-        setUser({...user, [e.target.name]: e.target.value})
+    const handleInputChange = (name, value) => {
+        setUser({...user, [name]: value})
     }
 
     const handleLoginNavigation = () => {
         navigation.navigate('login');
     }
 
+    const handleFormSubmit = () => {
+        console.log(user)
+    }
     return (
         <View style={styles.container}>
             <View style={styles.textContainer}>
@@ -32,46 +36,48 @@ export default function Register({navigation}) {
                     placeholder="Full Names"
                     name= "fullnames"
                     style={styles.textInput}
-                    onChangeText={handleInputChange}
+                    onChangeText={(text) => handleInputChange("fullnames", text)}
                     value={user.fullnames}
                 />
                 <TextInput
                     placeholder="Address"
                     name= "address"
                     style={styles.textInput}
-                    onChangeText={handleInputChange}
+                    onChangeText={(text) => handleInputChange("address", text)}
                     value={user.address}
                 />
                 <TextInput
                     placeholder="Email"
                     name= "email"
                     style={styles.textInput}
-                    onChangeText={handleInputChange}
+                    onChangeText={(text) => handleInputChange("email", text)}
                     value={user.email}
                 />
                 <TextInput
                     placeholder="Phone Number"
                     name= "phone"
                     style={styles.textInput}
-                    onChangeText={handleInputChange}
+                    onChangeText={(text) => handleInputChange("phone", text)}
                     value={user.phone}
                 />
                 <TextInput
                     placeholder="National ID"
                     name= "nid"
                     style={styles.textInput}
-                    onChangeText={handleInputChange}
+                    onChangeText={(text) => handleInputChange("nid", text)}
                     value={user.nid}
                 />
                 <TextInput
                     placeholder="Password"
                     name = "password"
+                    secureTextEntry={true}
                     style={styles.textInput}
-                    onChangeText={handleInputChange}
+                    onChangeText={(text) => handleInputChange("password", text)}
                     value={user.password}
                 />
                 <CustomButton 
-                    title="Login" 
+                    title="Sign Up"
+                    onPress={handleFormSubmit} 
                 />
             </View>
             <View style={styles.textContainer}>
