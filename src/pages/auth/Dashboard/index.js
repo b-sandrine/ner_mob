@@ -1,8 +1,20 @@
 import { View, Text } from "react-native"
-export default function Dashboard () {
+import authService from "../../../service/authService"
+import CustomButton from "../../../components/CustomButton"
+
+export default function Dashboard({navigation}) {
+
+    const handleAddCandate = () => {
+        navigation.navigate('addCandidate')
+    }
+
     return (
         <View>
-            <Text>Welcome user!!</Text>
+            <Text>Welcome back {authService.getRole()}!</Text>
+            <CustomButton
+                title="Add Candidate"
+                onPress={handleAddCandate}
+            />
         </View>
     )
 }

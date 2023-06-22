@@ -20,8 +20,8 @@ const storeRole = (role) => {
     localStorage.setItem('role', role)
 }
 
-const getRole = (role) => {
-    localStorage.getItem('role')
+const getRole = () => {
+    return localStorage.getItem('role')
 }
 
 const authService = {

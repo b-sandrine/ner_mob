@@ -3,6 +3,7 @@ import Welcome from "../pages/Welcome/Welcome";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Dashboard from "../pages/auth/Dashboard";
+import AddCandidate from "../pages/AddCandidate/addCandidate";
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,11 @@ export default function Navigation() {
         <Stack.Screen
           name="dashboard"
           component={Dashboard}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="addCandidate"
+          component={AddCandidate}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
