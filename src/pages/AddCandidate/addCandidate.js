@@ -81,7 +81,6 @@ export default function AddCandidate({ navigation }) {
                     value={user.nid}
                 />
                 
-                <ProfilePictureUploader />
                 <View style={styles.buttonContainer}>
                     <CustomButton
                         title="Cancel"
