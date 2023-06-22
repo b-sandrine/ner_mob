@@ -1,29 +1,53 @@
 import React, { useState } from "react";
-import { View, Image, Button } from "react-native";
-import ImagePicker from 'react-native-image-picker'
+import { View, Image, StyleSheet, SafeAreaView, TouchableOpacity, Text } from "react-native";
+import { launchImageLibrary } from "react-native-image-picker";
 
 const ProfilePictureUploader = () => {
   const [profilePicture, setProfilePicture] = useState(null);
 
-  const selectImage = () => {
-    ImagePicker.showImagePicker({}, (response) => {
-      if (response.didCancel) {
-        console.log("User cancelled image picker");
-      } else if (response.error) {
-        console.log("ImagePicker Error: ", response.error);
-      } else {
-        const source = { uri: response.uri };
-        setProfilePicture(source);
+  const imagePicker = () => {
+    let options = {
+      storageOptions: {
+        path: 'image',
+      }
+    };
+
+    launchImageLibrary(options, response => {
+      if (response?.assets?.length > 0) {
+        setProfilePicture(response.assets[0].url);
+        console.log(response.assets[0].url);
       }
     });
-  };
+  }
 
   return (
-    <View>
-      {profilePicture && <Image source={profilePicture} style={{ width: 200, height: 200 }} />}
-      <Button title="Select Image" onPress={selectImage} />
-    </View>
+    <SafeAreaView>
+      <View>
+        {profilePicture && <Image source={{ uri: profilePicture }} style={{ width: 200, height: 200 }} />}
+        <TouchableOpacity onPress={imagePicker} style={styles.button}>
+          <Text style={styles.buttonText}>Select Image</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  button: {
+    marginTop: 20,
+    height: 50,
+    width: '60%',
+    backgroundColor: 'skyblue',
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center'
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  }
+});
 
 export default ProfilePictureUploader;

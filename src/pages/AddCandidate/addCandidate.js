@@ -80,13 +80,7 @@ export default function AddCandidate({ navigation }) {
                     onChangeText={(text) => handleInputChange("nid", text)}
                     value={user.nid}
                 />
-                <TextInput
-                    placeholder="Profile Picture"
-                    name="profile"
-                    style={styles.textInput}
-                    onChangeText={(text) => handleInputChange("profile", text)}
-                    value={user.profile}
-                />
+                
                 <ProfilePictureUploader />
                 <View style={styles.buttonContainer}>
                     <CustomButton
