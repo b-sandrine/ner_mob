@@ -1,20 +1,20 @@
-import { Text, View, StyleSheet , TextInput} from "react-native";
+import { Text, View, StyleSheet, TextInput } from "react-native";
 // import Input from "../../components/Input";
 import { useState } from "react";
 import CustomButton from "../../components/CustomButton";
 import axios from "axios";
 import authService from "../../service/authService";
 
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
     const [user, setUser] = useState({
         email: "",
         password: ""
     });
 
-    const [error, setError] = useState(''); 
+    const [error, setError] = useState('');
 
     const handleInputChange = (name, value) => {
-        setUser({...user, [name]: value});
+        setUser({ ...user, [name]: value });
     }
 
     const handleRegisterNavigation = () => {
@@ -23,21 +23,22 @@ export default function Login({navigation}) {
 
     const handleFormSubmit = () => {
         console.log(user);
-        const token = response.data.payload.token;
-        const role = response.data.payload.user.role;
 
-        console.log(token + "  " + role);
-        authService.storeAuthToken(token);
-        authService.storeRole(role);
-        axios.post('http://localhost:3000/api/users/login',user)
-        .then((response) => {
-            console.log(response);
-            navigation.navigate('dashboard');
-        })    
-        .catch((err) => {
-            console.log(err.response.error.data);
-            setError(err.response.error.data)
-        })
+        axios.post('http://localhost:3000/api/users/login', user)
+            .then((response) => {
+                console.log(response);
+                const token = response.data.payload.token;
+                const role = response.data.payload.user.role;
+
+                console.log(token + "  " + role);
+                authService.storeAuthToken(token);
+                authService.storeRole(role);
+                navigation.navigate('dashboard');
+            })
+            .catch((err) => {
+                console.log(err.response.error.data);
+                setError(err.response.error.data)
+            })
     }
 
     return (
@@ -61,14 +62,14 @@ export default function Login({navigation}) {
                     onChangeText={(text) => handleInputChange('password', text)}
                     value={user.password}
                 />
-                <CustomButton 
-                    title="Login" 
+                <CustomButton
+                    title="Login"
                     onPress={handleFormSubmit}
                 />
             </View>
             <View style={styles.textContainer}>
                 <Text style={styles.text}>OR</Text>
-                <Text style={styles.minText}>Do not have an account?  <Text style={{color: '#018CE3'}} onPress={handleRegisterNavigation}>Register</Text></Text>
+                <Text style={styles.minText}>Do not have an account?  <Text style={{ color: '#018CE3' }} onPress={handleRegisterNavigation}>Register</Text></Text>
             </View>
         </View>
     )
@@ -92,13 +93,13 @@ const styles = StyleSheet.create({
         fontSize: 25,
         fontWeight: 'bold',
         margin: 5,
-        color: '#4F4F4F', 
+        color: '#4F4F4F',
     },
     minText: {
         alignSelf: 'center',
         fontSize: 16,
         margin: 5,
-        color: '#4F4F4F', 
+        color: '#4F4F4F',
     },
     textInput: {
         width: 260,
