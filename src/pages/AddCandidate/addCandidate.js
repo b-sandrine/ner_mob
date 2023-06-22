@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, TextInput, Image } from "react-native";
 import { useState } from "react";
 import CustomButton from "../../components/CustomButton";
 import axios from "axios";
+import ProfilePictureUploader from "../../components/ProfilePictureUploader";
 
 export default function AddCandidate({ navigation }) {
 
@@ -86,11 +87,7 @@ export default function AddCandidate({ navigation }) {
                     onChangeText={(text) => handleInputChange("profile", text)}
                     value={user.profile}
                 />
-                <View style={styles.imageContainer}>
-                    {user.profile ? (
-                        <Image source={{ uri: user.profile }} style={styles.previewImage} />
-                    ) : null}
-                </View>
+                <ProfilePictureUploader />
                 <View style={styles.buttonContainer}>
                     <CustomButton
                         title="Cancel"
