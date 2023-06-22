@@ -3,6 +3,7 @@ import { Text, View, StyleSheet , TextInput} from "react-native";
 import { useState } from "react";
 import CustomButton from "../../components/CustomButton";
 import axios from "axios";
+import authService from "../../service/authService";
 
 export default function Login({navigation}) {
     const [user, setUser] = useState({
@@ -22,6 +23,12 @@ export default function Login({navigation}) {
 
     const handleFormSubmit = () => {
         console.log(user);
+        const token = response.data.payload.token;
+        const role = response.data.payload.user.role;
+
+        console.log(token + "  " + role);
+        authService.storeAuthToken(token);
+        authService.storeRole(role);
         axios.post('http://localhost:3000/api/users/login',user)
         .then((response) => {
             console.log(response);
