@@ -1,38 +1,40 @@
-import { Text, View, StyleSheet , TextInput} from "react-native";
+import { Text, View, StyleSheet, TextInput, Image } from "react-native";
 // import Input from "../../components/Input";
 import { useState } from "react";
 import CustomButton from "../../components/CustomButton";
 import axios from "axios";
 
-export default function AddCandidate({navigation}) {
-    
+export default function AddCandidate({ navigation }) {
+
     const [user, setUser] = useState({
         fullnames: "",
         address: "",
         email: "",
         phoneNumber: "",
         nid: "",
+        profile: "",
     })
-    const [error, setError] = useState(''); 
+    const [error, setError] = useState('');
 
     const handleInputChange = (name, value) => {
-        setUser({...user, [name]: value})
+        setUser({ ...user, [name]: value })
     }
 
     const handleCancel = () => {
         navigation.navigate('dashboard');
     }
-    
+
     const handleAddCandidate = () => {
         console.log(user)
-        axios.post('http://localhost:3000/api/candidates/create',user)
-        .then((response) => {
-            console.log(response);
-        })    
-        .catch((err) => {
-            console.log(err);
-            setError(err.response.data.error)
-        })
+        axios.post('http://localhost:3000/api/candidates/create', user)
+            .then((response) => {
+                console.log(response);
+                navigation.navigate('dashboard')
+            })
+            .catch((err) => {
+                console.log(err);
+                setError(err.response.data.error)
+            })
     }
     return (
         <View style={styles.container}>
@@ -44,49 +46,63 @@ export default function AddCandidate({navigation}) {
             <View>
                 <TextInput
                     placeholder="Full Names"
-                    name= "fullnames"
+                    name="fullnames"
                     style={styles.textInput}
                     onChangeText={(text) => handleInputChange("fullnames", text)}
                     value={user.fullnames}
                 />
                 <TextInput
                     placeholder="Address"
-                    name= "address"
+                    name="address"
                     style={styles.textInput}
                     onChangeText={(text) => handleInputChange("address", text)}
                     value={user.address}
                 />
                 <TextInput
                     placeholder="Email"
-                    name= "email"
+                    name="email"
                     style={styles.textInput}
                     onChangeText={(text) => handleInputChange("email", text)}
                     value={user.email}
                 />
                 <TextInput
                     placeholder="Phone Number"
-                    name= "phone"
+                    name="phone"
                     style={styles.textInput}
                     onChangeText={(text) => handleInputChange("phoneNumber", text)}
                     value={user.phone}
                 />
                 <TextInput
                     placeholder="National ID"
-                    name= "nid"
+                    name="nid"
                     style={styles.textInput}
                     onChangeText={(text) => handleInputChange("nid", text)}
                     value={user.nid}
                 />
-                <CustomButton 
-                    title="Cancel"
-                    style={{width: 100 , marginRight: 10}}
-                    onPress={handleCancel} 
+                <TextInput
+                    placeholder="Profile Picture"
+                    name="profile"
+                    style={styles.textInput}
+                    onChangeText={(text) => handleInputChange("profile", text)}
+                    value={user.profile}
                 />
-                <CustomButton 
-                    title="Submit"
-                    style={{width: 100 , marginRight: 10}}
-                    onPress={handleAddCandidate} 
-                />
+                <View style={styles.imageContainer}>
+                    {user.profile ? (
+                        <Image source={{ uri: user.profile }} style={styles.previewImage} />
+                    ) : null}
+                </View>
+                <View style={styles.buttonContainer}>
+                    <CustomButton
+                        title="Cancel"
+                        style={{ width: 100, marginRight: 10 }}
+                        onPress={handleCancel}
+                    />
+                    <CustomButton
+                        title="Submit"
+                        style={{ width: 100, marginRight: 10 }}
+                        onPress={handleAddCandidate}
+                    />
+                </View>
             </View>
         </View>
     )
@@ -109,13 +125,13 @@ const styles = StyleSheet.create({
         fontSize: 25,
         fontWeight: 'bold',
         margin: 5,
-        color: '#4F4F4F', 
+        color: '#4F4F4F',
     },
     minText: {
         alignSelf: 'center',
         fontSize: 16,
         margin: 5,
-        color: '#4F4F4F', 
+        color: '#4F4F4F',
     },
     textInput: {
         width: 260,
@@ -132,5 +148,21 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10,
         alignSelf: 'center'
-    }
+    },
+    buttonContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
+    imageContainer: {
+        alignItems: "center",
+        marginTop: 10,
+        marginBottom: 20,
+    },
+    previewImage: {
+        width: 200,
+        height: 200,
+        borderRadius: 100,
+        marginTop: 10,
+    },
 })
