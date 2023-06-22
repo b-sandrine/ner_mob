@@ -13,7 +13,7 @@ export default function AddCandidate({ navigation }) {
         email: "",
         phoneNumber: "",
         nid: "",
-        profile: "",
+        // profile: "",
     })
     const [error, setError] = useState('');
 
